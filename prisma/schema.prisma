@@ -3,6 +3,11 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 generator typescriptInterfaces {
   provider      = "prisma-generator-typescript-interfaces"
   output        = "../src/dto/interfaces.ts"
@@ -14,11 +19,6 @@ generator typescriptInterfaces {
   modelType     = "interface"
   omitRelations = "false"
   prettier      = "true"
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model migrations {
