@@ -1,17 +1,14 @@
-import {
-  Entity,
-  Column,
-  Unique,
-  ForeignKey,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-  Index,
-} from "typeorm";
+import { Entity, Column, Unique, ForeignKey, PrimaryColumn } from "typeorm";
 import { User } from "./User";
 import { TimestampCols } from "./utils/timestampscols";
 import Address from "./Eddress";
 
-@Entity({ name: "person" })
+export enum PersonType {
+  INDIVIDUAL = "individual",
+  COMPANY = "company",
+}
+
+@Entity({ name: "persons" })
 export class Person extends TimestampCols {
   @Unique("UQ_person_cpf", ["cpf"])
   @Column({ nullable: false })
@@ -20,6 +17,15 @@ export class Person extends TimestampCols {
   @Unique("UQ_person_email", ["email"])
   @Column({ nullable: false })
   email!: string;
+
+  @Column({
+    type: "enum",
+    enum: PersonType,
+    nullable: false,
+    default: PersonType.INDIVIDUAL,
+    enumName: "PersonTypeEnum",
+  })
+  type!: PersonType;
 
   @PrimaryColumn({
     type: "int",

@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  Index,
-  In,
-  JsonContains,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Index } from "typeorm";
 import { TimestampCols } from "./utils/timestampscols";
 
 @Entity({ name: "addresses" })
